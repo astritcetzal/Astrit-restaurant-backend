@@ -1,0 +1,11 @@
+package mx.edu.tecdesoftware.Astrit_restaurant_backend.persistence.crud;
+
+import mx.edu.tecdesoftware.Astrit_restaurant_backend.persistence.entity.Producto;
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ProductoCrudRepository extends CrudRepository<Producto, Integer> {
+
+}
