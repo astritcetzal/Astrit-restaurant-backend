@@ -15,7 +15,7 @@ public class Producto {
     private String nombre;
     //categoria
     @Column(name="id_categoria")
-    private Integer idCtegoria;
+    private Integer idCategoria;
     //precio
     private double precio;
 
@@ -43,12 +43,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public Integer getIdCtegoria() {
-        return idCtegoria;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setIdCtegoria(Integer idCtegoria) {
-        this.idCtegoria = idCtegoria;
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
     public double getPrecio() {
@@ -57,6 +57,14 @@ public class Producto {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public List<DetallePedido> getProducto() {

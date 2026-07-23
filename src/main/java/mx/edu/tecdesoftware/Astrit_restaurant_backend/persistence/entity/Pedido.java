@@ -24,7 +24,7 @@ public class Pedido {
     @JoinColumn(name="id_mesa",
     insertable=false, updatable=false)
     private Mesa mesa;
-
+/*Agregar referencia a cliente*/
     @OneToMany(mappedBy ="pedido", cascade = CascadeType.ALL)
     private List<DetallePedido> pedido;
 
