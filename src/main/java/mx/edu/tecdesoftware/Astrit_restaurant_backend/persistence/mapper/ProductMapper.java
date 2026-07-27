@@ -21,6 +21,6 @@ public interface ProductMapper {
         //este archivo traduce variables de base de datos
     Product toProduct (Producto producto);
     List<Product> toProducts(List<Producto> productos);
-
-
+    @InheritInverseConfiguration
+    Producto toProducto(Product product);
 }

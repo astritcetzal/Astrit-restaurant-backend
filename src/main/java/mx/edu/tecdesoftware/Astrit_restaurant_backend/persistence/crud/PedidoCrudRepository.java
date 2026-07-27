@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface PedidoCrudRepository extends CrudRepository<Pedido, Integer> {
-    Optional<Pedido> findByIdCliente(String clienteId);
+    Optional<Pedido> findByIdClientId(Integer clienteId);
 }

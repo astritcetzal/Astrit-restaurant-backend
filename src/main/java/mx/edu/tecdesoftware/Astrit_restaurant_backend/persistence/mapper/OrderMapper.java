@@ -13,7 +13,7 @@ import java.util.List;
 public interface OrderMapper {
     @Mappings({
             @Mapping(source="idPedido", target="orderId"),
-            @Mapping(source="idCliente", target="idClient"), //resolver nombre
+            @Mapping(source="idCliente", target="clientId"), //resolver nombre
             @Mapping(source="idMesa", target="tableId"),
             @Mapping(source="metodoPago", target="paymentMethod"),
             @Mapping(source="pedido", target="orders")
@@ -22,10 +22,8 @@ public interface OrderMapper {
 
     List<Order> toOrders(List<Pedido> pedidos);
     @InheritInverseConfiguration
-    @org.mapstruct.Mapping(target="mesa", ignore = true)
-    Pedido toCompra(Order order);
-
-    //agregar igual para cliente
-
+    @Mapping(target="mesa", ignore = true)
+    @Mapping(target="cliente", ignore=true)
+    Pedido toPedido(Order order);
 
 }

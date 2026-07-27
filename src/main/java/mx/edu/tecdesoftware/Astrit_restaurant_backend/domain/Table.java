@@ -2,6 +2,8 @@ package mx.edu.tecdesoftware.Astrit_restaurant_backend.domain;
 
 public class Table {
     private Integer tableId;
+    private int tableNumber;
+    private String location;
     private boolean active;
     private int seats;
 
@@ -11,6 +13,22 @@ public class Table {
 
     public void setTableId(Integer tableId) {
         this.tableId = tableId;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public boolean isActive() {

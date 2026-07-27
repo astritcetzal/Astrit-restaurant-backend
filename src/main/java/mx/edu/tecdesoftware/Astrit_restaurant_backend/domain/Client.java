@@ -1,13 +1,16 @@
 package mx.edu.tecdesoftware.Astrit_restaurant_backend.domain;
-public class Client {
-    private String clientId;
-    private String name;
 
-    public String getClientId() {
+import java.util.List;
+
+public class Client {
+    private Integer clientId;
+    private String name;
+    private List<Order> order;
+    public Integer getClientId() {
         return clientId;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(Integer clientId) {
         this.clientId = clientId;
     }
 
@@ -17,5 +20,13 @@ public class Client {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 public class Order {
 
     private Integer orderId;
-    private String clientId;
+    private Integer clientId;
     private Integer tableId;
     private Character paymentMethod;
     private List<OrderDetail> orders;
@@ -18,12 +18,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getIdClient() {
+    public Integer getClientId() {
         return clientId;
     }
 
-    public void setIdClient(String idClient) {
-        this.clientId = idClient;
+    public void setClientId(Integer clientId) {
+        this.clientId = clientId;
     }
 
     public Integer getTableId() {

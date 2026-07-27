@@ -16,10 +16,11 @@ public interface DetailsOrderMapper {
             @Mapping(source="total", target="total")
     })
     OrderDetail toOrderDetail(DetallePedido detallePedido);
+    @InheritInverseConfiguration
     @Mappings({
             @Mapping(target="pedido", ignore=true),
             @Mapping(target="producto", ignore=true),
             @Mapping(target = "id.idPedido", ignore=true)
     })
-    DetallePedido toDetallePedido(DetallePedido item);
+    DetallePedido toDetallePedido(OrderDetail item);
 }
