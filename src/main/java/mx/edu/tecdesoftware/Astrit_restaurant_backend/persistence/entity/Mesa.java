@@ -1,21 +1,19 @@
 package mx.edu.tecdesoftware.Astrit_restaurant_backend.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import javax.lang.model.element.Name;
 
 @Entity
 @Table(name="mesa")
 public class Mesa {
-
-    //mesaid estado asientp
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_mesa")
     private Integer idMesa;
-
+    @Column(name="numero_mesa")
+    private int numeroMesa;
+    private String ubicacion;
     private boolean estado;
     private int asientos;
 
@@ -25,6 +23,22 @@ public class Mesa {
 
     public void setIdMesa(Integer idMesa) {
         this.idMesa = idMesa;
+    }
+
+    public int getNumeroMesa() {
+        return numeroMesa;
+    }
+
+    public void setNumeroMesa(int numeroMesa) {
+        this.numeroMesa = numeroMesa;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public boolean isEstado() {

@@ -13,18 +13,21 @@ public class Pedido {
     private Integer idPedido;
 
     @Column(name="id_cliente")
-    private String idCliente;
+    private Integer idCliente;
     @Column(name="id_mesa")
     private Integer idMesa;
 
     @Column(name="metodo_pago")
     private Character metodoPago;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", insertable=false, updatable=false)
+    private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name="id_mesa",
     insertable=false, updatable=false)
     private Mesa mesa;
-/*Agregar referencia a cliente*/
+
     @OneToMany(mappedBy ="pedido", cascade = CascadeType.ALL)
     private List<DetallePedido> pedido;
 
@@ -36,11 +39,11 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public String getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -58,6 +61,14 @@ public class Pedido {
 
     public void setMetodoPago(Character metodoPago) {
         this.metodoPago = metodoPago;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Mesa getMesa() {

@@ -8,26 +8,36 @@ import java.util.List;
 @Table(name = "cliente")
 public class Cliente {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //para que spring sepa que la bd generará la el numero
     @Column(name="id_cliente")
-    private String idCliente;
+    private Integer idCliente;
     private String nombre;
 
-    //¡agregar a bd!
-    /*
-    @OneToMany(mappedBy="cliente")
-    private List<Pedido> pedidos;*/
-        public String getIdCliente() {
-            return idCliente;
-        }
-        public void setIdCliente(String idCliente){
-            this.idCliente = idCliente;
-        }
 
-        public String getNombre() {
+    @OneToMany(mappedBy="cliente")
+    private List<Pedido> pedidos;
+
+    public Integer getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public String getNombre() {
             return nombre;
         }
 
         public void setNombre (String nombre){
             this.nombre = nombre;
         }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+}
