@@ -21,6 +21,10 @@ public class PedidoRepository  implements OrderRepository {
         List<Pedido> pedidos = (List<Pedido>) pedidoCrudRepository.findAll();
         return orderMapper.toOrders(pedidos);
     }
+    public Optional<Order> getOrder(Integer orderId){
+        return pedidoCrudRepository.findById(orderId)
+                .map(pedido -> orderMapper.toOrder(pedido));
+    }
     public Optional<List<Order>> getByClientId(Integer clienteId){
         return pedidoCrudRepository.findByIdCliente(clienteId)
                 .map(pedidos -> orderMapper.toOrders(pedidos));
@@ -28,7 +32,7 @@ public class PedidoRepository  implements OrderRepository {
     public Order save(Order order){
         Pedido pedido = orderMapper.toPedido((order));
         if (pedido.getPedido()!= null){
-            pedido.getPedido().forEach(producto ->producto.setPedido(pedido));
+            pedido.getPedido().forEach(detalle -> detalle.setPedido(pedido));
         }
         return orderMapper.toOrder(pedidoCrudRepository.save(pedido));
     }

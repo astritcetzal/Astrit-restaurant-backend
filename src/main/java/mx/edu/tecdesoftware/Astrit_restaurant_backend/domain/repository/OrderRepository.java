@@ -10,5 +10,6 @@ public interface OrderRepository {
     Optional<List<Order>> getByClientId(Integer clienteId);
     void delete(int pedidoId);
     Order save(Order order);
+    Optional<Order> getOrder(Integer orderId);
 
 }
