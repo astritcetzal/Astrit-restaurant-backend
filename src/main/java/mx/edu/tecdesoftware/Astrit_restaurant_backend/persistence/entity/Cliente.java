@@ -14,7 +14,7 @@ public class Cliente {
     private String nombre;
 
 
-    @OneToMany(mappedBy="cliente")
+    @OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
     private List<Pedido> pedidos;
 
     public Integer getIdCliente() {

@@ -49,5 +49,10 @@ public class ProductoRepository implements ProductRepository
         productoCrudRepository.deleteById(idProducto);
     }
 
+    public Optional<Product> getProductByName(String name){
+        return productoCrudRepository.findByNombre(name)
+                .map(producto -> productMapper.toProduct(producto));
+    }
+
 
 }
