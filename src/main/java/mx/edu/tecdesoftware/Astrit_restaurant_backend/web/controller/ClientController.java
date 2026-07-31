@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Client;
+import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Product;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.repository.ClientRepository;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +87,14 @@ public class ClientController {
     @ApiResponse(responseCode = "409", description = "Client confilct (diplicate code)")
     @ApiResponse(responseCode = "500", description = "Internal server error")
     public ResponseEntity<Client> save(@RequestBody Client client){
-        return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
+        Client savedClient = clientService.save(client);
+
+        if (savedClient == null) {
+            // Si es nulo, significa que el nombre ya existía. Lanzamos 409 Conflict.
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        return new ResponseEntity<>(savedClient, HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")
     @Operation(summary="Delet a client by Id", description ="Delete a client if it exists")

@@ -29,7 +29,7 @@ public class Pedido {
     private Mesa mesa;
 
     @OneToMany(mappedBy ="pedido", cascade = CascadeType.ALL)
-    private List<DetallePedido> pedido;
+    private List<DetallePedido> detalles;
 
     public Integer getIdPedido() {
         return idPedido;
@@ -79,12 +79,16 @@ public class Pedido {
         this.mesa = mesa;
     }
 
-    public List<DetallePedido> getPedido() {
-        return pedido;
+    public List<DetallePedido> getDetalles() {
+        return detalles;
     }
 
-    public void setPedido(List<DetallePedido> pedido) {
-        this.pedido = pedido;
+    public void setDetalles(List<DetallePedido> detalles) {
+        this.detalles = detalles;
+        if (detalles != null) {
+            for (DetallePedido detalle : detalles) {
+                detalle.setPedido(this);
+            }
+        }
     }
-
 }

@@ -12,7 +12,7 @@ public class Cliente {
     @Column(name="id_cliente")
     private Integer idCliente;
     private String nombre;
-
+    private String contrasena;
 
     @OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
     private List<Pedido> pedidos;
@@ -41,4 +41,11 @@ public class Cliente {
         this.pedidos = pedidos;
     }
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
 }

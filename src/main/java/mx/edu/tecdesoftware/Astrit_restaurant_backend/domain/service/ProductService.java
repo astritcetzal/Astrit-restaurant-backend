@@ -26,12 +26,10 @@ public class ProductService {
     public Product save(Product product){
         // Buscamos si ya existe alguien con ese nombre
         Optional<Product> existingProduct = productRepository.getProductByName(product.getName());
-
         if (existingProduct.isPresent()) {
             //Si existee retornamos null o lanzamos una excepción para avisarle al controlador
             return null;
         }
-
         // Si no existe, lo guardamos normalmente
         return productRepository.save(product);
     }
@@ -40,7 +38,7 @@ public class ProductService {
         if(getProduct(productoId).isPresent()){
             productRepository.delete(productoId);
             return true;
-        }{
+        }else {
             return false;
         }
     }

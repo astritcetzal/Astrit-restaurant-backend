@@ -29,8 +29,7 @@ public class ProductController {
     @Operation(
             summary = "Get all products",
             description = "Return a List of all available products"
-    )
-    // que valor esperas que te responda
+    )// que valor esperas que te responda
     @ApiResponse(
             responseCode = "200",
             description = "Successfull retrieval of products"

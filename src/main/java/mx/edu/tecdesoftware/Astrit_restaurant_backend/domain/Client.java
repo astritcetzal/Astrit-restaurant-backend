@@ -6,6 +6,7 @@ public class Client {
     private Integer clientId;
     private String name;
     private List<Order> order;
+    private String contrasena;
     public Integer getClientId() {
         return clientId;
     }
@@ -28,5 +29,13 @@ public class Client {
 
     public void setOrder(List<Order> order) {
         this.order = order;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

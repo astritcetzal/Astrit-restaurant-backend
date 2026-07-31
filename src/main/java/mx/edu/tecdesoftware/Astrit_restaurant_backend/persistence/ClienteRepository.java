@@ -33,4 +33,10 @@ public class ClienteRepository implements ClientRepository {
         clienteCrudRepository.deleteById(clientId);
     }
 
+    @Override
+    public Optional<Client> getClientByName(String name) {
+        return clienteCrudRepository.findByNombre(name)
+                .map(cliente-> clientMapper.toClient(cliente));
+    }
+
 }

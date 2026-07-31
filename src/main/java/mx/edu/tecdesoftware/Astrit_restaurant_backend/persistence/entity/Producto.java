@@ -24,7 +24,7 @@ public class Producto {
     private Categoria categoria;
 
 
-    @OneToMany(mappedBy ="producto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy ="producto")
     private List<DetallePedido> producto;
 
     public Integer getIdProducto() {

@@ -15,7 +15,8 @@ public class DetallePedido {
     @JoinColumn(name="id_pedido", insertable = false, updatable = false)
     private Pedido pedido;
     @ManyToOne
-    @JoinColumn(name="id_Producto", insertable = false,updatable = false)
+    @MapsId("idProducto")
+    @JoinColumn(name="id_producto", insertable = false,updatable = false)
     private Producto producto;
 
     public DetallePedidoPK getId() {
