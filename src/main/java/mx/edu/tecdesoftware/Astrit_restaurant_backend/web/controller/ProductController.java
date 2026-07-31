@@ -118,7 +118,7 @@ public class ProductController {
     }
     @DeleteMapping("/{id}")
     @Operation(summary  ="Delete a product by ID", description = "Delete a product if it exists")
-    @ApiResponse(responseCode = "201", description = "Product delete successfully")
+    @ApiResponse(responseCode = "200", description = "Product delete successfully")
     @ApiResponse(responseCode = "400", description = "Invalid product data")
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @ApiResponse(responseCode = "403", description = "Forbidden")

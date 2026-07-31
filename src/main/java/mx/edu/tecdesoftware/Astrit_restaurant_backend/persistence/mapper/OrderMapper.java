@@ -16,7 +16,7 @@ public interface OrderMapper {
             @Mapping(source="idCliente", target="clientId"), //resolver nombre
             @Mapping(source="idMesa", target="tableId"),
             @Mapping(source="metodoPago", target="paymentMethod"),
-            @Mapping(source="pedido", target="orders")
+            @Mapping(source="detalles", target="details")
     })
     Order toOrder(Pedido pedido);
 

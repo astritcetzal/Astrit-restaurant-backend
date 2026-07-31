@@ -8,7 +8,7 @@ public class Order {
     private Integer clientId;
     private Integer tableId;
     private Character paymentMethod;
-    private List<OrderDetail> orders;
+    private List<OrderDetail> details;
 
     public Integer getOrderId() {
         return orderId;
@@ -42,11 +42,11 @@ public class Order {
         this.paymentMethod = paymentMethod;
     }
 
-    public List<OrderDetail> getOrders() {
-        return orders;
+    public List<OrderDetail> getDetails() {
+        return details;
     }
 
-    public void setOrders(List<OrderDetail> orders) {
-        this.orders = orders;
+    public void setDetails(List<OrderDetail> details) {
+        this.details = details;
     }
 }

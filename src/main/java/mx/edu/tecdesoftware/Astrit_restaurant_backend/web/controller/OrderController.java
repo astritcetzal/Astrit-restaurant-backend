@@ -55,7 +55,7 @@ public class OrderController {
             responseCode = "500",
             description = "Internal server error"
     )
-    public ResponseEntity<List<Order>> getByClient(@PathVariable @Parameter( description = "clientId", required = true) Integer clientId ){
+    public ResponseEntity<List<Order>> getByClient(@PathVariable @Parameter( description = "clientId", example="2", required = true) Integer clientId ){
         return orderService.getByClient(clientId).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
     @PostMapping("/")
@@ -72,7 +72,7 @@ public class OrderController {
                                            "clientId":2,
                                            "tableId": 6,
                                            "paymentMethod": "E",
-                                           "orders":[
+                                           "details":[
                                                 {
                                                   "productId": 3,
                                                   "amount": 2,
@@ -102,8 +102,8 @@ public class OrderController {
 
      @DeleteMapping("/{id}")
      @Operation(summary  ="Delete a order by ID", description = "Delete a order if it exists")
-     @ApiResponse(responseCode = "201", description = "Order delete successfully")
-     @ApiResponse(responseCode = "400", description = "Invalid product data")
+     @ApiResponse(responseCode = "200", description = "Order delete successfully")
+     @ApiResponse(responseCode = "400", description = "Invalid order data")
      @ApiResponse(responseCode = "401", description = "Unauthorized")
      @ApiResponse(responseCode = "403", description = "Forbidden")
 

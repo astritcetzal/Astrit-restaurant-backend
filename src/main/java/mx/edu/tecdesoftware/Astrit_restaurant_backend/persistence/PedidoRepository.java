@@ -31,8 +31,8 @@ public class PedidoRepository  implements OrderRepository {
     }
     public Order save(Order order){
         Pedido pedido = orderMapper.toPedido((order));
-        if (pedido.getPedido()!= null){
-            pedido.getPedido().forEach(detalle -> detalle.setPedido(pedido));
+        if (pedido.getDetalles()!= null){
+            pedido.getDetalles().forEach(detalle -> detalle.setPedido(pedido));
         }
         return orderMapper.toOrder(pedidoCrudRepository.save(pedido));
     }

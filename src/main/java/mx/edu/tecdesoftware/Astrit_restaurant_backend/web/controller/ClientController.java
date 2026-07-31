@@ -58,14 +58,14 @@ public class ClientController {
             responseCode = "500",
             description = "Internal server error"
     )
-    public ResponseEntity<Client> getByCliente(@Parameter(description = "ID of the client retrieved", example="7", required = true) @PathVariable("clientId") Integer clientId){
+    public ResponseEntity<Client> getByCliente(@Parameter(description = "ID of the client retrieved", example="2", required = true) @PathVariable("clientId") Integer clientId){
         return clientService.getClient(clientId).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/")
     @Operation(
             summary = "Save a new client",
-            description ="Register a new client and return the created product",
+            description ="Register a new client and return the created client",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     required = true,
                     content = @Content(
@@ -98,11 +98,12 @@ public class ClientController {
     }
     @DeleteMapping("/{id}")
     @Operation(summary="Delet a client by Id", description ="Delete a client if it exists")
-    @ApiResponse(responseCode = "201", description = "Client delete successfully")
+    @ApiResponse(responseCode = "200", description = "Client delete successfully")
     @ApiResponse(responseCode = "400", description = "Invalid product data")
-        @ApiResponse(responseCode = "403", description = "Forbidden")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "403", description = "Forbidden")
     public ResponseEntity delete(
-            @Parameter(description = "Id of the client to be deleted", example="7", required = true)
+            @Parameter(description = "Id of the client to be deleted", example="3", required = true)
             @PathVariable("id") Integer clientId){
         if (clientService.delete(clientId)){
             return ResponseEntity.ok().build();
