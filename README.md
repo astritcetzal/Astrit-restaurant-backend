@@ -54,3 +54,54 @@ Durante el ciclo de desarrollo, se implementaron soluciones tecnicas clave:
 1. **Persistencia Maestro-Detalle (Cascade):** Se configuro la relacion entre `Pedido` y `DetallePedido`. Se utilizo una llave primaria compuesta (`@EmbeddedId` y `@MapsId`) para que, al enviar un JSON con el pedido y sus platillos, JPA guardara el encabezado y todos sus detalles automaticamente en la base de datos mediante una sola transaccion (CascadeType.ALL).
 2. **Seguridad Stateless:** Se configuro el filtro de seguridad de Spring Security (`JwtFilter`) para interceptar peticiones. Esto permite rechazar el acceso (HTTP 403 Forbidden) a usuarios no autenticados y validar el token JWT en la cabecera de las peticiones autorizadas.
 3. **Documentacion Precisa:** Se refinaron los esquemas de Swagger (OpenAPI) para asegurar que los objetos JSON de ejemplo validaran correctamente los tipos de datos y los codigos semanticos HTTP (200, 201, 403).
+
+## Script de Base de Datos (DDL)
+A continuacion, se presenta el script SQL utilizado para la creacion de la estructura relacional en PostgreSQL:
+
+```sql
+CREATE TABLE categoria (
+    id_categoria SERIAL PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL,
+    estado BOOLEAN NOT NULL
+);
+
+CREATE TABLE producto (
+    id_producto SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    id_categoria INT NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
+);
+
+CREATE TABLE cliente (
+    id_cliente SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    contrasena VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE mesa (
+    id_mesa SERIAL PRIMARY KEY,
+    numero_mesa INT NOT NULL,
+    ubicacion VARCHAR(50) NOT NULL,
+    estado BOOLEAN NOT NULL,
+    asientos INT NOT NULL
+);
+
+CREATE TABLE pedido (
+    id_pedido SERIAL PRIMARY KEY,
+    id_cliente INT NOT NULL,
+    id_mesa INT NOT NULL,
+    metodo_pago CHAR(1) NOT NULL,
+    CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+    CONSTRAINT fk_mesa FOREIGN KEY (id_mesa) REFERENCES mesa(id_mesa)
+);
+
+CREATE TABLE detalle_pedido (
+    id_pedido INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (id_pedido, id_producto),
+    CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE,
+    CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+);
