@@ -43,3 +43,14 @@ public class AstritRestaurantBackendApplication implements CommandLineRunner {
     }
 }
 ````
+### SCRIPT PARA PostgreSQL
+```SQL
+INSERT INTO cliente (nombre, contrasena)
+VALUES ('Astrit Cetzal', '$2a$10$AQUI_PEGA_EL_HASH_QUE_TE_DIO_LA_CONSOLA');
+```
+## Proceso de Desarrollo y Retos Superados
+Durante el ciclo de desarrollo, se implementaron soluciones tecnicas clave:
+
+1. **Persistencia Maestro-Detalle (Cascade):** Se configuro la relacion entre `Pedido` y `DetallePedido`. Se utilizo una llave primaria compuesta (`@EmbeddedId` y `@MapsId`) para que, al enviar un JSON con el pedido y sus platillos, JPA guardara el encabezado y todos sus detalles automaticamente en la base de datos mediante una sola transaccion (CascadeType.ALL).
+2. **Seguridad Stateless:** Se configuro el filtro de seguridad de Spring Security (`JwtFilter`) para interceptar peticiones. Esto permite rechazar el acceso (HTTP 403 Forbidden) a usuarios no autenticados y validar el token JWT en la cabecera de las peticiones autorizadas.
+3. **Documentacion Precisa:** Se refinaron los esquemas de Swagger (OpenAPI) para asegurar que los objetos JSON de ejemplo validaran correctamente los tipos de datos y los codigos semanticos HTTP (200, 201, 403).
