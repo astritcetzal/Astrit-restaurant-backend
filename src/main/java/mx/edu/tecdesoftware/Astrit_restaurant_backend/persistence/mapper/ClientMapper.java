@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {OrderMapper.class})
 public interface ClientMapper {
     //PEDIDIO EN BD, NO OLVIDAR
     @Mappings({
@@ -21,4 +21,5 @@ public interface ClientMapper {
     @InheritInverseConfiguration
     @Mapping(target = "pedidos", ignore=true)
     Cliente toCliente(Client client);
+
 }
