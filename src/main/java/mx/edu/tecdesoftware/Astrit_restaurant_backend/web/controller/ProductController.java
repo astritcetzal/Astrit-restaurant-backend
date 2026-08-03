@@ -123,7 +123,7 @@ public class ProductController {
     @ApiResponse(responseCode = "401", description = "Unauthorized")
     @ApiResponse(responseCode = "403", description = "Forbidden")
 
-    public ResponseEntity delete(@PathVariable("id") Integer productId){
+    public ResponseEntity delete(@Parameter(description = "ID of the product to be deleted", example="4", required = true) @PathVariable("id")  Integer productId){
         if (productService.delete(productId)){
             return ResponseEntity.ok().build();
         }
