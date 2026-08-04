@@ -32,10 +32,7 @@ public class PedidoRepository  implements OrderRepository {
     }
     @Override
     public Order save(Order order) {
-        // 1. Traducimos del Dominio a la Entidad
         Pedido pedido = orderMapper.toPedido(order);
-
-        // 2. APLICAMOS EL PARCHE AQUÍ
         pedido.getDetalles().forEach(detalle -> {
             detalle.setPedido(pedido);
             if (detalle.getProducto() == null) {
@@ -44,8 +41,6 @@ public class PedidoRepository  implements OrderRepository {
                 detalle.setProducto(producto);
             }
         });
-
-        // 3. Guardamos y volvemos a traducir
         return orderMapper.toOrder(pedidoCrudRepository.save(pedido));
     }
     public void delete(int idPedido){

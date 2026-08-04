@@ -20,7 +20,6 @@ public class ProductoRepository implements ProductRepository
     private ProductMapper productMapper;
     public List<Product> getAll(){
         List<Producto> productos = (List<Producto>) productoCrudRepository.findAll();
-        /*aqui entra el mapper todo lo que esté en español es para a productos*/
         return productMapper.toProducts(productos);
     }
     public Optional<List<Product>> getByCategory(Integer categoryId)
@@ -28,8 +27,6 @@ public class ProductoRepository implements ProductRepository
         List<Producto> productos=productoCrudRepository.findByIdCategoriaOrderByNombreAsc(categoryId);
         return Optional.of(productMapper.toProducts(productos));
     }
-
-    // obtener un producto dado el id
     public Optional<Product> getProduct(int productId){
         return productoCrudRepository.findById(productId)
                 .map(producto -> productMapper.toProduct(producto));

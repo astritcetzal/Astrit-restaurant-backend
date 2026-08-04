@@ -1,5 +1,4 @@
 package mx.edu.tecdesoftware.Astrit_restaurant_backend.persistence.mapper;
-
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Order;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.persistence.entity.Pedido;
 import org.mapstruct.InheritInverseConfiguration;
@@ -8,7 +7,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 import java.util.List;
-
 @Mapper(componentModel = "spring", uses={DetailsOrderMapper.class})
 public interface OrderMapper {
     @Mappings({

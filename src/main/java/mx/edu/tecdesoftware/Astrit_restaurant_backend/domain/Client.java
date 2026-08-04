@@ -1,11 +1,15 @@
 package mx.edu.tecdesoftware.Astrit_restaurant_backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class Client {
     private Integer clientId;
     private String name;
+    @JsonIgnore
     private List<Order> order;
+    @JsonIgnore
     private String contrasena;
     public Integer getClientId() {
         return clientId;

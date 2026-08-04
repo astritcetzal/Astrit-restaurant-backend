@@ -10,7 +10,6 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    // Pista Crítica: Llave de más de 32 caracteres
     private static final String SECRET_KEY_STRING = "AstritRestaurantSuperSecretKeyParaJWT2026#";
     private final SecretKey secretKey = Keys.hmacShaKeyFor(SECRET_KEY_STRING.getBytes());
 
