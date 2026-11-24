@@ -24,7 +24,7 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(
             summary = "Get all clients",
             description="Return a List of all available clients"
@@ -62,7 +62,7 @@ public class ClientController {
         return clientService.getClient(clientId).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(
             summary = "Save a new client",
             description ="Register a new client and return the created client",

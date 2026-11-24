@@ -20,12 +20,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin(origins = "*")
 @Tag(name="Product", description="Manage products in the store")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(
             summary = "Get all products",
             description = "Return a List of all available products"

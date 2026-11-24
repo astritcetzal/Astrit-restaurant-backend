@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Orders")
+@RequestMapping("/orders")
 @Tag(name="Order", description="Manage orders in th restaurant")
 public class OrderController {
     @Autowired
     private OrderService orderService;
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(
             summary="Get all orders"
     )
@@ -58,7 +58,7 @@ public class OrderController {
     public ResponseEntity<List<Order>> getByClient(@PathVariable @Parameter( description = "clientId", example="2", required = true) Integer clientId ){
         return orderService.getByClient(clientId).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(
             summary="Save a new order",
             description="Register a  new order and return the created order",

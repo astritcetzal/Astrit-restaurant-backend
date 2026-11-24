@@ -19,7 +19,7 @@ import java.util.List;
 public class TableController {
     @Autowired
     private TableService tableService;
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(
             summary = "Get all tables",
             description = "Return a List of all available tables"
@@ -57,7 +57,7 @@ public class TableController {
         return tableService.getTable(tableId)
                 .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(
             summary = "Save a new table",
             description = "Register a new table and return the created table",
