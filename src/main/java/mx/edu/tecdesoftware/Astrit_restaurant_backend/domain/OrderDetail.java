@@ -1,10 +1,14 @@
 package mx.edu.tecdesoftware.Astrit_restaurant_backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class OrderDetail {
     private Integer productId;
-    private Integer amount;
-    private double total;
-    /*private Boolean Agregar a bd*/
+    private String productName;
+    @JsonAlias("amount")
+    private Integer quantity;
+    private double unitPrice;
+    private double subtotal;
 
     public Integer getProductId() {
         return productId;
@@ -14,19 +18,35 @@ public class OrderDetail {
         this.productId = productId;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public double getTotal() {
-        return total;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
 }

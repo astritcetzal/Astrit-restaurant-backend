@@ -22,6 +22,8 @@ public class Producto {
     @Column(name="image_url", length = 500)
     private String imageUrl;
 
+    private Boolean disponible;
+
     @ManyToOne
     @JoinColumn(name="id_categoria", insertable = false, updatable = false)
     private Categoria categoria;
@@ -68,6 +70,14 @@ public class Producto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Boolean getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
     }
 
     public Categoria getCategoria() {

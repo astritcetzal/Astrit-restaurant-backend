@@ -6,6 +6,7 @@ public class Product {
     private Integer categoryId;
     private double price;
     private String imageUrl;
+    private Boolean available;
     private Category category;
 
     public Integer getProductId() {
@@ -46,6 +47,14 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Boolean getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public Category getCategory() {

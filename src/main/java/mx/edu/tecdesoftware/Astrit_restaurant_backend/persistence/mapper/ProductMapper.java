@@ -16,6 +16,7 @@ public interface ProductMapper {
             @Mapping(source = "idCategoria", target = "categoryId"),
             @Mapping(source = "precio", target = "price"),
             @Mapping(source = "imageUrl", target = "imageUrl"),
+            @Mapping(source = "disponible", target = "available"),
             @Mapping(source = "categoria", target = "category")
     })
         //este archivo traduce variables de base de datos
@@ -27,6 +28,7 @@ public interface ProductMapper {
             @Mapping(source = "categoryId", target = "idCategoria"),
             @Mapping(source = "price", target = "precio"),
             @Mapping(source = "imageUrl", target = "imageUrl"),
+            @Mapping(source = "available", target = "disponible"),
             @Mapping(source = "category", target = "categoria")
     })
     Producto toProducto(Product product);

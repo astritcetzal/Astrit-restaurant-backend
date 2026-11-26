@@ -8,6 +8,7 @@ public class Order {
     private Integer clientId;
     private Integer tableId;
     private Character paymentMethod;
+    private double total;
     private List<OrderDetail> details;
 
     public Integer getOrderId() {
@@ -40,6 +41,14 @@ public class Order {
 
     public void setPaymentMethod(Character paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public List<OrderDetail> getDetails() {
