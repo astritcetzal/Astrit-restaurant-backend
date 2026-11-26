@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Order;
-import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.repository.OrderRepository;
+import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.dto.SalesReportDto;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +37,18 @@ public class OrderController {
     )
     public ResponseEntity<List<Order>> getAll(){
             return new ResponseEntity<>(orderService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/reports/sales")
+    @Operation(
+            summary = "Get sales report",
+            description = "Return total revenue, total orders, and total registered clients (ADMIN only)"
+    )
+    @ApiResponse(responseCode = "200", description = "Sales report generated successfully")
+    @ApiResponse(responseCode = "401", description = "Unauthorized")
+    @ApiResponse(responseCode = "403", description = "Forbidden")
+    public ResponseEntity<SalesReportDto> getSalesReport() {
+        return ResponseEntity.ok(orderService.getSalesReport());
     }
 
     @GetMapping("/client/{clientId}")
@@ -75,13 +87,11 @@ public class OrderController {
                                            "details":[
                                                 {
                                                   "productId": 3,
-                                                  "amount": 2,
-                                                  "total": 70
+                                                  "quantity": 2
                                                 },
                                                 {
                                                   "productId": 1,
-                                                  "amount": 1,
-                                                  "total": 85
+                                                  "quantity": 1
                                                 }
                                            ]
                                            }

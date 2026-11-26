@@ -1,5 +1,6 @@
 package mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.service;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Client;
+import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Role;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.repository.ClientRepository;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,9 @@ public class AuthService {
         Optional<Client> client = clientRepository.getClientByName(username);
         // Validamos que exista y que el password plano coincida con el hash
         if (client.isPresent() && passwordEncoder.matches(password, client.get().getContrasena())) {
-            // Retornamos el token generado
-            return jwtUtil.generateToken(client.get().getName());
+            String role = client.get().getRole() != null ? client.get().getRole().name() : Role.CLIENTE.name();
+            // Retornamos el token generado con el rol
+            return jwtUtil.generateToken(client.get().getName(), role);
         }
         // Si las credenciales no coinciden, retornamos nulo
         return null;

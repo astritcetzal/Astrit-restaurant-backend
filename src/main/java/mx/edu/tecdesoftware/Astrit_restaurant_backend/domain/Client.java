@@ -7,6 +7,7 @@ import java.util.List;
 public class Client {
     private Integer clientId;
     private String name;
+    private Role role;
     @JsonIgnore
     private List<Order> order;
     @JsonIgnore
@@ -41,5 +42,13 @@ public class Client {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

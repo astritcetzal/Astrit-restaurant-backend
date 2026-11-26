@@ -2,6 +2,7 @@ package mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.repository;
 
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Order;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,5 +12,7 @@ public interface OrderRepository {
     void delete(int pedidoId);
     Order save(Order order);
     Optional<Order> getOrder(Integer orderId);
+    long countOrders();
+    BigDecimal getTotalRevenue();
 
 }

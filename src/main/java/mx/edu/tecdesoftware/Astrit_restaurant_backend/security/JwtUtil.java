@@ -3,6 +3,7 @@ package mx.edu.tecdesoftware.Astrit_restaurant_backend.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Role;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -14,8 +15,14 @@ public class JwtUtil {
     private final SecretKey secretKey = Keys.hmacShaKeyFor(SECRET_KEY_STRING.getBytes());
 
     public String generateToken(String username) {
+        return generateToken(username, Role.CLIENTE.name());
+    }
+
+    public String generateToken(String username, String role) {
+        String normalizedRole = Role.fromString(role).name();
         return Jwts.builder()
                 .subject(username)
+                .claim("role", normalizedRole)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // Expira en 10 horas
                 .signWith(secretKey)
@@ -24,6 +31,11 @@ public class JwtUtil {
 
     public String extractUsername(String token) {
         return getClaims(token).getSubject();
+    }
+
+    public String extractRole(String token) {
+        String role = getClaims(token).get("role", String.class);
+        return Role.fromString(role).name();
     }
 
     public boolean validateToken(String token, String username) {

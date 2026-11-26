@@ -9,6 +9,7 @@ import mx.edu.tecdesoftware.Astrit_restaurant_backend.persistence.mapper.OrderMa
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 @Repository
@@ -45,6 +46,17 @@ public class PedidoRepository  implements OrderRepository {
     }
     public void delete(int idPedido){
         pedidoCrudRepository.deleteById(idPedido);
+    }
+
+    @Override
+    public long countOrders() {
+        return pedidoCrudRepository.count();
+    }
+
+    @Override
+    public BigDecimal getTotalRevenue() {
+        BigDecimal total = pedidoCrudRepository.sumTotalRevenue();
+        return total != null ? total : BigDecimal.ZERO;
     }
 
 }

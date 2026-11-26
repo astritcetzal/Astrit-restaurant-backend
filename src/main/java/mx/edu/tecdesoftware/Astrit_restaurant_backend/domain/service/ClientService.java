@@ -1,7 +1,7 @@
 package mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.service;
 
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Client;
-import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Product;
+import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.Role;
 import mx.edu.tecdesoftware.Astrit_restaurant_backend.domain.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +25,9 @@ public class ClientService {
         if (existingClient.isPresent()) {
             //Si existee retornamos null o lanzamos una excepción para avisarle al controlador
             return null;
+        }
+        if (client.getRole() == null) {
+            client.setRole(Role.CLIENTE);
         }
         return clientRepository.save(client);
     }

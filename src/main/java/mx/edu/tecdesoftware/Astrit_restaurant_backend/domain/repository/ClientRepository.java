@@ -12,4 +12,5 @@ public interface ClientRepository {
     Client save(Client client);
     void delete(int clientId);
     Optional<Client> getClientByName(String name);
+    long countClients();
 }

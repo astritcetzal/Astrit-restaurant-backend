@@ -39,4 +39,9 @@ public class ClienteRepository implements ClientRepository {
                 .map(cliente-> clientMapper.toClient(cliente));
     }
 
+    @Override
+    public long countClients() {
+        return clienteCrudRepository.count();
+    }
+
 }

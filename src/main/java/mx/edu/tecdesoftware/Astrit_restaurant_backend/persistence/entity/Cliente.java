@@ -13,6 +13,14 @@ public class Cliente {
     private Integer idCliente;
     private String nombre;
     private String contrasena;
+    private String rol;
+
+    @PrePersist
+    public void prePersist() {
+        if (rol == null || rol.isBlank()) {
+            rol = "CLIENTE";
+        }
+    }
 
     @OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
     private List<Pedido> pedidos;
@@ -47,5 +55,13 @@ public class Cliente {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }
