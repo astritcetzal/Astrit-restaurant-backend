@@ -98,3 +98,126 @@ CREATE TABLE detalle_pedido (
     CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE,
     CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
+
+
+````
+-- ============================================================================
+-- 1. LIMPIEZA DE TABLAS (Orden inverso a las dependencias FK)
+-- ============================================================================
+DROP TABLE IF EXISTS detalle_pedido CASCADE;
+DROP TABLE IF EXISTS pedido CASCADE;
+DROP TABLE IF EXISTS producto CASCADE;
+DROP TABLE IF EXISTS categoria CASCADE;
+DROP TABLE IF EXISTS mesa CASCADE;
+DROP TABLE IF EXISTS cliente CASCADE;
+
+-- ============================================================================
+-- 2. CREACIÓN DE ESTRUCTURA
+-- ============================================================================
+CREATE TABLE categoria (
+id_categoria SERIAL PRIMARY KEY,
+descripcion VARCHAR(50) NOT NULL,
+estado BOOLEAN NOT NULL
+);
+
+CREATE TABLE producto (
+id_producto SERIAL PRIMARY KEY,
+nombre VARCHAR(50) NOT NULL,
+id_categoria INT NOT NULL,
+precio DECIMAL(10,2) NOT NULL,
+CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
+);
+
+CREATE TABLE cliente (
+id_cliente SERIAL PRIMARY KEY,
+nombre VARCHAR(50) NOT NULL,
+contrasena VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE mesa (
+id_mesa SERIAL PRIMARY KEY,
+numero_mesa INT NOT NULL,
+ubicacion VARCHAR(50) NOT NULL,
+estado BOOLEAN NOT NULL,
+asientos INT NOT NULL
+);
+
+CREATE TABLE pedido (
+id_pedido SERIAL PRIMARY KEY,
+id_cliente INT NOT NULL,
+id_mesa INT NOT NULL,
+metodo_pago CHAR(1) NOT NULL,
+CONSTRAINT fk_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+CONSTRAINT fk_mesa FOREIGN KEY (id_mesa) REFERENCES mesa(id_mesa)
+);
+
+CREATE TABLE detalle_pedido (
+id_pedido INT NOT NULL,
+id_producto INT NOT NULL,
+cantidad INT NOT NULL,
+total DECIMAL(10,2) NOT NULL,
+PRIMARY KEY (id_pedido, id_producto),
+CONSTRAINT fk_pedido FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE,
+CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+);
+
+-- ============================================================================
+-- 3. POBLADO DE CATEGORÍAS (IDs 1 al 7 autogenerados en orden)
+-- ============================================================================
+INSERT INTO categoria (descripcion, estado) VALUES
+('Entradas y Botanas', TRUE),              -- id_categoria = 1
+('Sopas y Caldos', TRUE),                  -- id_categoria = 2
+('Tacos y Antojitos', TRUE),               -- id_categoria = 3
+('Platos Fuertes', TRUE),                  -- id_categoria = 4
+('Aguas Frescas', TRUE),                   -- id_categoria = 5
+('Bebidas Calientes', TRUE),               -- id_categoria = 6
+('Refrescos y Embotelladas', TRUE);        -- id_categoria = 7
+
+-- ============================================================================
+-- 4. POBLADO DE PRODUCTOS (21 platillos y bebidas, todos <= 50 caracteres)
+-- ============================================================================
+INSERT INTO producto (nombre, id_categoria, precio) VALUES
+-- 1. Entradas y Botanas
+('Guacamole tradicional', 1, 95.00),
+('Queso fundido con chorizo', 1, 115.00),
+('Sopesitos surtidos (3 pzas)', 1, 85.00),
+
+-- 2. Sopas y Caldos
+('Sopa de tortilla (Azteca)', 2, 90.00),
+('Pozole rojo tradicional', 2, 130.00),
+('Caldo tlalpeño', 2, 110.00),
+
+-- 3. Tacos y Antojitos
+('Orden de tacos al pastor', 3, 105.00),
+('Enchiladas suizas', 3, 125.00),
+('Chilaquiles tradicionales', 3, 110.00),
+
+-- 4. Platos Fuertes
+('Mole poblano con pollo', 4, 155.00),
+('Cochinita pibil', 4, 145.00),
+('Arrachera a la parrilla', 4, 230.00),
+
+-- 5. Aguas Frescas
+('Agua de horchata (500 ml)', 5, 40.00),
+('Agua de jamaica (500 ml)', 5, 40.00),
+('Agua de tamarindo (500 ml)', 5, 40.00),
+
+-- 6. Bebidas Calientes
+('Café de olla', 6, 45.00),
+('Chocolate caliente mexicano', 6, 55.00),
+('Champurrado tradicional', 6, 50.00),
+
+-- 7. Refrescos y Embotelladas
+('Refresco tradicional en vidrio', 7, 38.00),
+('Refresco comercial', 7, 35.00),
+('Agua mineral preparada', 7, 45.00);
+
+-- ============================================================================
+-- 5. DATOS BASE PARA MESAS (Útil si conectas TableController)
+-- ============================================================================
+INSERT INTO mesa (numero_mesa, ubicacion, estado, asientos) VALUES
+(1, 'Terraza Principal', TRUE, 4),
+(2, 'Salón Interior', TRUE, 2),
+(3, 'Área Familiar', TRUE, 6),
+(4, 'Barra Central', TRUE, 2);
+````
