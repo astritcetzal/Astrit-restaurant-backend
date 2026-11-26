@@ -5,6 +5,7 @@ public class Product {
     private String name;
     private Integer categoryId;
     private double price;
+    private String imageUrl;
     private Category category;
 
     public Integer getProductId() {
@@ -37,6 +38,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Category getCategory() {

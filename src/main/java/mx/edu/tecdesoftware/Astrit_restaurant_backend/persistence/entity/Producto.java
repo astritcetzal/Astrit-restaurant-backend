@@ -19,6 +19,9 @@ public class Producto {
     //precio
     private double precio;
 
+    @Column(name="image_url", length = 500)
+    private String imageUrl;
+
     @ManyToOne
     @JoinColumn(name="id_categoria", insertable = false, updatable = false)
     private Categoria categoria;
@@ -57,6 +60,14 @@ public class Producto {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Categoria getCategoria() {
